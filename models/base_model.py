@@ -6,7 +6,8 @@ Class BaseModel
 from datetime import datetime
 import uuid
 import models
-Dtime = "%Y-%m-%dT%H:%M:%S.%f"
+# dtm = date format
+dtm = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class BaseModel:
@@ -19,10 +20,10 @@ class BaseModel:
                 if key != '__class__':
                     setattr(self, key, val)
             if hasattr(self, 'created_at') and type(self.created_at) is str:
-                self.created_at = datetime.strptime(kwargs["created_at"], Dtime)
+                self.created_at = datetime.strptime(kwargs["created_at"], dtm)
             if hasattr(self, 'updated_at') and type(self.updated_at) is str:
                 self.updated_at = datetime.strptime(
-                    kwargs["updated_at"], Dtime)
+                    kwargs["updated_at"], dtm)
 
         else:
             self.id = str(uuid.uuid4())
@@ -45,8 +46,8 @@ class BaseModel:
         """ returns a dic containing keys and values of the instance"""
         n_dict = self.__dict__.copy()
         if "created_at" in n_dict:
-            n_dict["created_at"] = n_dict["created_at"].strftime(Dtime)
+            n_dict["created_at"] = n_dict["created_at"].strftime(dtm)
         if "updated_at" in n_dict:
-            n_dict["updated_at"] = n_dict["updated_at"].strftime(Dtime)
+            n_dict["updated_at"] = n_dict["updated_at"].strftime(dtm)
         n_dict["__class__"] = self.__class__.__name__
         return n_dict
