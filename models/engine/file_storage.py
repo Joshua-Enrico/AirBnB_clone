@@ -5,9 +5,9 @@ Class FileStorage
 
 import json
 from models.base_model import BaseModel
+from models.user import User
 
-
-classes = {"BaseModel": BaseModel}
+classes = {"BaseModel": BaseModel, "User": User}
 
 class FileStorage:
     """serialize instance to json file and deserialize json file to instance"""
