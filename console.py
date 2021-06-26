@@ -22,7 +22,6 @@ class HBNBCommand(cmd.Cmd):
     HBNB Class
     """
     prompt = '(hbnb)'
-    __all_117 = 0
 
     def do_quit(self, line):
         """quit command: exit the program"""
@@ -148,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """overriden a command when the command doesn't exist"""
-        my_list = line.split('.')
+        my_list = line.split('.(,)')
         if len(my_list) >= 2:
             if my_list[1] == "all()":
                 self.do_all(my_list[0])
