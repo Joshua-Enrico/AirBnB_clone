@@ -164,6 +164,25 @@ class HBNBCommand(cmd.Cmd):
         if len(my_list) >= 2:
             if my_list[1] == "all()":
                 self.do_all(my_list[0])
+            elif my_list[1] == "count()":
+                self.count(my_list[0])
+
+    def do_count(self, line):
+        "count instances of the class"
+
+        cmd_line = line.split()
+
+        if cmd_line[0] not in allowed_class:
+            return
+        else:
+            counter = 0
+            keys_list = models.storage.all().keys()
+            for search in keys_list:
+                len_search = len(cmd_line[0])
+                if search[:len_search] == cmd_line[0]:
+                    counter += 1
+                    # print(search)
+            print(counter)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
