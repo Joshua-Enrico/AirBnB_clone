@@ -11,7 +11,6 @@ from models.amenity import Amenity
 from models.review import Review
 from models.user import User
 import models
-import sys
 
 allowed_class = {"BaseModel": BaseModel, "Place": Place, "State": State,
                  "City": City, "Amenity": Amenity, "Review": Review,
@@ -34,6 +33,53 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """overridden to not do nothing"""
         pass
+
+    def precmd(self, line):
+        """ Edit given command to allow second type of input"""
+        tmp = line.split(".")
+        cmd1 = tmp[0]
+        tmp2 = tmp[1].split("(")
+        cmd2 = tmp2[0]
+        tmp3 = tmp2[1].split(")")
+        cmd3 = tmp3[0].split(",", 1)
+        # cmd3 = tmp3[0]
+        # print(cmd1)
+        # print(cmd2)
+        # print(cmd3)
+        # print("---------")
+        if (len(cmd3[0]) == 0):
+            line = cmd2 + " " + cmd1
+        else:
+            line = cmd2 + " " + cmd1
+            cmd_id = cmd3[0]
+            dicty = cmd3[1].replace('{', ' ').replace(':', ' ').replace('}', ' ')
+            dicty.split()
+            i = 0
+            for i in range(0, len(dicty)):
+                if i == ',':
+                    print(dicty[:i])
+            # for k, v in dicty.items(): doesn't work
+            #    print("{} {} {} {}".format(line, cmd_id. k, v))
+            # dicty = cmd3[1].replace('{', ' ').replace(':', ' ').replace(',', ' ').replace('}', ' ')
+            # dicty.split()
+            # print(cmd_id)
+            # print("---------")
+            print(dicty)
+            # line = " ".join(dicty)
+            # print(line)
+            return
+
+        return cmd.Cmd.precmd(self, line)
+
+        """
+        if not sys.stdin.isatty():
+            print()
+        if '.' in line:
+            line = line.replace('.', ' ').replace('(', ' ').replace(')', ' ')
+            cmd_argv = line.split()
+            cmd_argv[0], cmd_argv[1] = cmd_argv[1], cmd_argv[0]
+            line = " ".join(cmd_argv)
+        return cmd.Cmd.precmd(self, line)"""
 
     def do_create(self, line):
         """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
@@ -106,8 +152,6 @@ class HBNBCommand(cmd.Cmd):
         if cmd_line[0] not in allowed_class.keys():
             print("** class doesn't exist **")
         else:
-            # instance = cmd_line[0] + "." + cmd_line[1]
-            # if instance in models.storage.all():
             if len(cmd_line) > 1:
                 instance = cmd_line[0] + "." + cmd_line[1]
                 if instance in models.storage.all():
@@ -144,15 +188,6 @@ class HBNBCommand(cmd.Cmd):
                 select_obj = models.storage.all().get(instance)
                 setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
                 select_obj.save()
-
-    def default(self, line):
-        """overriden a command when the command doesn't exist"""
-        my_list = line.split('.(,)')
-        if len(my_list) >= 2:
-            if my_list[1] == "all()":
-                self.do_all(my_list[0])
-            elif my_list[1] == "count()":
-                self.count(my_list[0])
 
     def do_count(self, line):
         "count instances of the class"
