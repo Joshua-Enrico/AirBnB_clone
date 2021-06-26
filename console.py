@@ -103,5 +103,31 @@ class HBNBCommand(cmd.Cmd):
                 print(models.storage.all()[instance], end="")
                 print('"]')
 
+    def do_update(self, line):
+        """Updates an instance based on the class name and id by adding or updating attribute
+            (save the change into the JSON file).
+            - Usage: update <class name> <id> <attribute name> "<attribute value>"
+            - Ex: $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
+            - Only one attribute can be updated at the time"""
+        cmd_line = line.split()
+        if len(cmd_line[0]) == 0:
+            print("** class name missing **")
+        elif cmd_line[0] not in allowed_class.keys():
+            print("** class doesn't exist **")
+        elif len(cmd_line[1]) == 0:
+            print("** instance id missing **")
+        else:
+            instance = cmd_line[0] + "." + cmd_line[1]
+            if instance not in models.storage.all():
+                print("** no instance found **")
+            elif len(cmd_line[2]) == 0:
+                print("** attribute name missing **")
+            elif len(cmd_line[3]) == 0:
+                print("** value missing **")
+            else:
+                select_obj = models.storage.all().get(instance)
+                setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
+                select_obj.save()
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
