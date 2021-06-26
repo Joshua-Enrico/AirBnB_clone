@@ -36,18 +36,6 @@ class HBNBCommand(cmd.Cmd):
         """overridden to not do nothing"""
         pass
 
-    def precmd(self, line):
-        """ Edit given command to allow second type of input"""
-        if not sys.stdin.isatty():
-            print()
-        if '.' in line:
-            HBNBCommand.__all_117 = 1
-            line = line.replace('.', ' ').replace('(', ' ').replace(')', ' ')
-            cmd_argv = line.split()
-            cmd_argv[0], cmd_argv[1] = cmd_argv[1], cmd_argv[0]
-            line = " ".join(cmd_argv)
-        return cmd.Cmd.precmd(self, line)
-
     def do_create(self, line):
         """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
         string = line + "()"
@@ -160,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """overriden a command when the command doesn't exist"""
-        my_list = line.split('.(,)')
+        my_list = line.split('.')
         if len(my_list) >= 2:
             if my_list[1] == "all()":
                 self.do_all(my_list[0])
