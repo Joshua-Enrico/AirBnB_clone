@@ -102,3 +102,23 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(new_inst['__class__'], 'BaseModel')
         self.assertEqual(new_inst['name'], 'Holbies')
         self.assertEqual(new_inst['my_number'], 89)
+
+
+    def test_str_method(self):
+        """testing str method, checking output"""
+        instance4 = BaseModel()
+        strr = "[BaseModel] ({}) {}".format(instance4.id, instance4.__dict__)
+        self.assertEqual(strr, str(instance4))
+
+    @mock.patch('models.storage')
+    def test_save_method(self, mock_storage):
+        """test save method and if it updates "updated_at" calling storage.save"""
+        instance4 = BaseModel()
+        created_at = instance4.created_at
+        updated_at = instance4.updated_at
+        instance4.save()
+        new_created_at = instance4.created_at
+        new_updated_at = instance4.updated_at
+        self.assertNotEqual(updated_at, new_updated_at)
+        self.assertEqual(created_at, new_created_at)
+        self.assertTrue(mock_storage.save.called)
