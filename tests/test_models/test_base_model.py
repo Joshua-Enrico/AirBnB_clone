@@ -36,7 +36,7 @@ class TestBaseModel(unittest.TestCase):
     """testing BaseModel Class"""
     @mock.patch('models.storage')
     def test_instances(self, mock_storage):
-        """Test that object is correctly created"""
+        """Testing that object is correctly created"""
         instance = BaseModel()
         self.assertIs(type(instance), BaseModel)
         instance.name = "Holberton"
