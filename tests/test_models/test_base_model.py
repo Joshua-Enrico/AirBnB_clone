@@ -41,7 +41,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIs(type(instance), BaseModel)
         instance.name = "Holberton"
         instance.number = 89
-        attrs_types = {
+        expectec_attrs_types = {
             "id": str,
             "created_at": datetime,
             "updated_at": datetime,
@@ -49,7 +49,7 @@ class TestBaseModel(unittest.TestCase):
             "number": int
         }
         #testing types and attr names
-        for attr, types in attrs_types.items():
+        for attr, types in expectec_attrs_types.items():
             with self.subTest(attr=attr, typ=types):
                 self.assertIn(attr, instance.__dict__)
                 self.assertIs(type(instance.__dict__[attr]), types)
@@ -85,3 +85,20 @@ class TestBaseModel(unittest.TestCase):
                 self.assertIs(type(tuuid), str)
 
         self.assertNotEqual(instance1.id, instance2.id)
+
+    def test_dictionary(self):
+        """testing to_dict correct funtionality"""
+        instance3 = BaseModel()
+        instance3.name = "Holbies"
+        instance3.my_number = 89
+        new_inst = instance3.to_dict()
+        expectec_attrs = ["id",
+                          "created_at",
+                          "updated_at",
+                          "name",
+                          "my_number",
+                          "__class__"]
+        self.assertCountEqual(new_inst.keys(), expectec_attrs)
+        self.assertEqual(new_inst['__class__'], 'BaseModel')
+        self.assertEqual(new_inst['name'], 'Holbies')
+        self.assertEqual(new_inst['my_number'], 89)
