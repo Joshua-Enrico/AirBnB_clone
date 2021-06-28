@@ -35,12 +35,12 @@ class TestDocs(unittest.TestCase):
 class TestBaseModel(unittest.TestCase):
     """testing BaseModel Class"""
     @mock.patch('models.storage')
-    def test_instantiation(self, mock_storage):
+    def test_instances(self, mock_storage):
         """Test that object is correctly created"""
-        inst = BaseModel()
-        self.assertIs(type(inst), BaseModel)
-        inst.name = "Holberton"
-        inst.number = 89
+        instance = BaseModel()
+        self.assertIs(type(instance), BaseModel)
+        instance.name = "Holberton"
+        instance.number = 89
         attrs_types = {
             "id": str,
             "created_at": datetime,
@@ -48,10 +48,40 @@ class TestBaseModel(unittest.TestCase):
             "name": str,
             "number": int
         }
-        for attr, typ in attrs_types.items():
-            with self.subTest(attr=attr, typ=typ):
-                self.assertIn(attr, inst.__dict__)
-                self.assertIs(type(inst.__dict__[attr]), typ)
+        #testing types and attr names
+        for attr, types in attrs_types.items():
+            with self.subTest(attr=attr, typ=types):
+                self.assertIn(attr, instance.__dict__)
+                self.assertIs(type(instance.__dict__[attr]), types)
         self.assertTrue(mock_storage.new.called)
-        self.assertEqual(inst.name, "Holberton")
-        self.assertEqual(inst.number, 89)
+        self.assertEqual(instance.name, "Holberton")
+        self.assertEqual(instance.number, 89)
+
+    def test_datetime(self):
+        """testing correct datetime assignation
+        correct assignation of created_at and updated_at"""
+        created_at = datetime.now()
+        instance1 = BaseModel()
+        updated_at = datetime.now()
+        self.assertEqual(created_at <= instance1.created_at <= updated_at, True)
+        time.sleep(1)
+        created_at = datetime.now()
+        instance2 = BaseModel()
+        updated_at = datetime.now()
+        self.assertTrue(created_at <= instance2.created_at <= updated_at, True)
+        self.assertEqual(instance1.created_at, instance1.created_at)
+        self.assertEqual(instance2.updated_at, instance2.updated_at)
+        self.assertNotEqual(instance1.created_at, instance2.created_at)
+        self.assertNotEqual(instance1.updated_at, instance2.updated_at)
+
+
+    def test_uuid(self):
+        """testing uuid"""
+        instance1 = BaseModel()
+        instance2 = BaseModel()
+        for instance in [instance1, instance2]:
+            tuuid = instance.id
+            with self.subTest(uuid=tuuid):
+                self.assertIs(type(tuuid), str)
+
+        self.assertNotEqual(instance1.id, instance2.id)
