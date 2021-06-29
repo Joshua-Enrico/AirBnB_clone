@@ -38,7 +38,8 @@ class HBNBCommand(cmd.Cmd):
     def precmd(self, line):
         """ Edit given command to allow second type of input"""
         tmp = line.split(".")
-        if (len(tmp) >= 2):
+        trust = line.split("{")
+        if (len(trust) >= 2):
             cmd1 = tmp[0]
             tmp2 = tmp[1].split("(")
             cmd2 = tmp2[0]
