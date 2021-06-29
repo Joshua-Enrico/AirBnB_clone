@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
             instance = eval(string)
             print(instance.id)
             instance.save()
-        except:
+        except Exception as f:
             print("** class doesn't exist **")
 
     def do_show(self, line):
@@ -166,7 +166,7 @@ class HBNBCommand(cmd.Cmd):
             $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
             - Only one attribute can be updated at the time"""
         cmd_line = line.split()
-        if len(cmd_line[0]) == 0:
+        if not cmd_line:
             print("** class name missing **")
         elif cmd_line[0] not in allowed_class.keys():
             print("** class doesn't exist **")
@@ -181,7 +181,8 @@ class HBNBCommand(cmd.Cmd):
             elif len(cmd_line[3]) == 0:
                 print("** value missing **")
             else:
-                if cmd_line[2] != "id" and cmd_line[2] != "created_at" and cmd_line[2] != "updated_at": 
+                if cmd_line[2] != "id" and cmd_line[2] \
+                        != "created_at" and cmd_line[2] != "updated_at":
                     select_obj = models.storage.all().get(instance)
                     setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
                     select_obj.save()
@@ -202,6 +203,7 @@ class HBNBCommand(cmd.Cmd):
                     counter += 1
                     # print(search)
             print(counter)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
