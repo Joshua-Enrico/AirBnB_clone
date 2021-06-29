@@ -38,31 +38,34 @@ class HBNBCommand(cmd.Cmd):
     def precmd(self, line):
         """ Edit given command to allow second type of input"""
         tmp = line.split(".")
-        cmd1 = tmp[0]
-        tmp2 = tmp[1].split("(")
-        cmd2 = tmp2[0]
-        tmp3 = tmp2[1].split(")")
-        cmd3 = tmp3[0].split(",", 1)
+        if (len(tmp) >= 2):
+            cmd1 = tmp[0]
+            tmp2 = tmp[1].split("(")
+            cmd2 = tmp2[0]
+            tmp3 = tmp2[1].split(")")
+            cmd3 = tmp3[0].split(",", 1)
 
-        if (len(cmd3[0]) == 0):
-            line = cmd2 + " " + cmd1
+            if (len(cmd3[0]) == 0):
+                line = cmd2 + " " + cmd1
+            else:
+                cmd_id = cmd3[0].replace('"', '')
+                line = cmd2 + " " + cmd1 + " " + cmd_id
+                dicty = cmd3[1].replace('{', ' ').replace(':', ' ') \
+                    .replace(',', ' ').replace('}', ' ') \
+                    .replace("'", ' ').replace('"', ' ')
+                dicty = dicty.split()
+
+                flag = 0
+                for n in dicty:
+                    if flag == 0:
+                        line = line + ' ' + n
+                        flag = 1
+                    elif flag == 1:
+                        line = line + ' ' + '"' + n + '"'
+                        flag = 0
+                # print(line)
         else:
-            cmd_id = cmd3[0].replace('"', '')
-            line = cmd2 + " " + cmd1 + " " + cmd_id
-            dicty = cmd3[1].replace('{', ' ').replace(':', ' ') \
-                .replace(',', ' ').replace('}', ' ') \
-                .replace("'", ' ').replace('"', ' ')
-            dicty = dicty.split()
-
-            flag = 0
-            for n in dicty:
-                if flag == 0:
-                    line = line + ' ' + n
-                    flag = 1
-                elif flag == 1:
-                    line = line + ' ' + '"' + n + '"'
-                    flag = 0
-            # print(line)
+            line = line
 
         return cmd.Cmd.precmd(self, line)
 
