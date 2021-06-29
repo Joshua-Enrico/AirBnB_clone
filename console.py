@@ -170,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif cmd_line[0] not in allowed_class.keys():
             print("** class doesn't exist **")
-        elif len(cmd_line[1]) == 0:
+        elif len(cmd_line) == 1:
             print("** instance id missing **")
         else:
             instance = cmd_line[0] + "." + cmd_line[1]
@@ -181,9 +181,10 @@ class HBNBCommand(cmd.Cmd):
             elif len(cmd_line[3]) == 0:
                 print("** value missing **")
             else:
-                select_obj = models.storage.all().get(instance)
-                setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
-                select_obj.save()
+                if cmd_line[2] != "id" and cmd_line[2] != "created_at" and cmd_line[2] != "updated_at": 
+                    select_obj = models.storage.all().get(instance)
+                    setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
+                    select_obj.save()
 
     def do_count(self, line):
         "count instances of the class"
