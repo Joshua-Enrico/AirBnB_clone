@@ -40,7 +40,7 @@ class FileStorage:
         json_obj = {}
         for key in self.__objects:
             json_obj[key] = self.__objects[key].to_dict()
-        with open(self.__file_path, 'w') as file:
+        with open(self.__file_path, 'w', encoding='UTF-8') as file:
             json.dump(json_obj, file)
 
     def reload(self):
@@ -49,7 +49,7 @@ class FileStorage:
         # otherwise, do nothing. If the file doesn’t exist
         #  no exception should be raised
         try:
-            with open(self.__file_path, 'r') as file:
+            with open(self.__file_path, 'r', encoding='UTF-8') as file:
                 jn = json.load(file)
             for key in jn:
                 self.__objects[key] = classes[jn[key]["__class__"]](**jn[key])
