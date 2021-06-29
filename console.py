@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
                             flag = 0
         else:
             line = line
-        print(line)
+        # print(line)
         return cmd.Cmd.precmd(self, line)
 
     def do_create(self, line):
