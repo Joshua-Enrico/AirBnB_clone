@@ -50,23 +50,25 @@ class HBNBCommand(cmd.Cmd):
             else:
                 cmd_id = cmd3[0].replace('"', '')
                 line = cmd2 + " " + cmd1 + " " + cmd_id
-                dicty = cmd3[1].replace('{', ' ').replace(':', ' ') \
-                    .replace(',', ' ').replace('}', ' ') \
-                    .replace("'", ' ').replace('"', ' ')
-                dicty = dicty.split()
+                if (len(cmd3) == 1):
+                    line = line
+                else:
+                    dicty = cmd3[1].replace('{', ' ').replace(':', ' ') \
+                        .replace(',', ' ').replace('}', ' ') \
+                        .replace("'", ' ').replace('"', ' ')
+                    dicty = dicty.split()
 
-                flag = 0
-                for n in dicty:
-                    if flag == 0:
-                        line = line + ' ' + n
-                        flag = 1
-                    elif flag == 1:
-                        line = line + ' ' + '"' + n + '"'
-                        flag = 0
-                # print(line)
+                    flag = 0
+                    for n in dicty:
+                        if flag == 0:
+                            line = line + ' ' + n
+                            flag = 1
+                        elif flag == 1:
+                            line = line + ' ' + '"' + n + '"'
+                            flag = 0
         else:
             line = line
-
+        print(line)
         return cmd.Cmd.precmd(self, line)
 
     def do_create(self, line):
