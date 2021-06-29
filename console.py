@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
     """
     HBNB Class
     """
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
 
     def do_quit(self, line):
         """quit command: exit the program"""
@@ -38,7 +38,8 @@ class HBNBCommand(cmd.Cmd):
     def precmd(self, line):
         """ Edit given command to allow second type of input"""
         tmp = line.split(".")
-        if (len(tmp) >= 2):
+        trust = line.split("{")
+        if (len(trust) >= 2):
             cmd1 = tmp[0]
             tmp2 = tmp[1].split("(")
             cmd2 = tmp2[0]
@@ -50,52 +51,40 @@ class HBNBCommand(cmd.Cmd):
             else:
                 cmd_id = cmd3[0].replace('"', '')
                 line = cmd2 + " " + cmd1 + " " + cmd_id
-                dicty = cmd3[1].replace('{', ' ').replace(':', ' ') \
-                    .replace(',', ' ').replace('}', ' ') \
-                    .replace("'", ' ').replace('"', ' ')
-                dicty = dicty.split()
+                if (len(cmd3) == 1):
+                    line = line
+                else:
+                    dicty = cmd3[1].replace('{', ' ').replace(':', ' ') \
+                        .replace(',', ' ').replace('}', ' ') \
+                        .replace("'", ' ').replace('"', ' ')
+                    dicty = dicty.split()
 
-                flag = 0
-                for n in dicty:
-                    if flag == 0:
-                        line = line + ' ' + n
-                        flag = 1
-                    elif flag == 1:
-                        line = line + ' ' + '"' + n + '"'
-                        flag = 0
-                # print(line)
+                    flag = 0
+                    for n in dicty:
+                        if flag == 0:
+                            line = line + ' ' + n
+                            flag = 1
+                        elif flag == 1:
+                            line = line + ' ' + '"' + n + '"'
+                            flag = 0
         else:
             line = line
-
+        # print(line)
         return cmd.Cmd.precmd(self, line)
 
     def do_create(self, line):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
             and prints the id"""
-        string = line + "()"
         if len(line) == 0:
             print("** class name missing **")
             return
         try:
+            string = line + "()"
             instance = eval(string)
             print(instance.id)
             instance.save()
         except:
             print("** class doesn't exist **")
-
-        """
-        if len(line) == 0:
-            print("** class name missing **")
-            return
-        elif line in allowed_class.keys():
-            instance =  allowed_class[line]()
-        elif line not in allowed_class.keys():
-            print("** class doesn't exist **")
-            return
-
-        print(instance.id)
-        instance.save()
-        """
 
     def do_show(self, line):
         """Prints the string representation of an instance
@@ -141,19 +130,31 @@ class HBNBCommand(cmd.Cmd):
             based or not on the class name.
             Ex: $ all BaseModel or $ all."""
         cmd_line = line.split()
-        if cmd_line[0] not in allowed_class.keys():
+        if len(cmd_line) == 0 or cmd_line[0] == "BaseModel":
+            print('["', end="")
+            flag = 0
+            for obj_id in models.storage.all().keys():
+                if flag == 1:
+                    print('", "', end="")
+                obj = models.storage.all()[obj_id]
+                print(obj, end="")
+                flag = 1
+            print('"]')
+        elif cmd_line[0] not in allowed_class.keys():
             print("** class doesn't exist **")
         else:
-            if len(cmd_line) > 1:
-                instance = cmd_line[0] + "." + cmd_line[1]
-                if instance in models.storage.all():
-                    print('["', end="")
-                    print(models.storage.all()[instance], end="")
-                    print('"]')
-            else:
-                print('["', end="")
-                print(models.storage.all(), end="")
-                print('"]')
+            print('["', end="")
+            # result = []
+            flag = 0
+            len_class = len(cmd_line[0])
+            for obj_id in models.storage.all().keys():
+                if obj_id[:len_class] == cmd_line[0]:
+                    if flag == 1:
+                        print('", "', end="")
+                    obj = models.storage.all()[obj_id]
+                    print(obj, end="")
+                    flag = 1
+            print('"]')
 
     def do_update(self, line):
         """Updates an instance based on the class name and id
@@ -169,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif cmd_line[0] not in allowed_class.keys():
             print("** class doesn't exist **")
-        elif len(cmd_line[1]) == 0:
+        elif len(cmd_line) == 1:
             print("** instance id missing **")
         else:
             instance = cmd_line[0] + "." + cmd_line[1]
@@ -180,9 +181,10 @@ class HBNBCommand(cmd.Cmd):
             elif len(cmd_line[3]) == 0:
                 print("** value missing **")
             else:
-                select_obj = models.storage.all().get(instance)
-                setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
-                select_obj.save()
+                if cmd_line[2] != "id" and cmd_line[2] != "created_at" and cmd_line[2] != "updated_at": 
+                    select_obj = models.storage.all().get(instance)
+                    setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
+                    select_obj.save()
 
     def do_count(self, line):
         "count instances of the class"
