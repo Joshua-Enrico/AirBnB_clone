@@ -11,6 +11,7 @@ from models.amenity import Amenity
 from models.review import Review
 from models.user import User
 import models
+import shlex
 
 allowed_class = {"BaseModel": BaseModel, "Place": Place, "State": State,
                  "City": City, "Amenity": Amenity, "Review": Review,
@@ -125,36 +126,25 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def do_all(self, line):
-        """Prints all string representation of all instances
-            based or not on the class name.
-            Ex: $ all BaseModel or $ all."""
-        cmd_line = line.split()
-        if len(cmd_line) == 0 or cmd_line[0] == "BaseModel":
-            print('["', end="")
-            flag = 0
-            for obj_id in models.storage.all().keys():
-                if flag == 1:
-                    print('", "', end="")
-                obj = models.storage.all()[obj_id]
-                print(obj, end="")
-                flag = 1
-            print('"]')
-        elif cmd_line[0] not in allowed_class.keys():
-            print("** class doesn't exist **")
+    def do_all(self, arg):
+        """Prints string representations of instances"""
+        args = shlex.split(arg)
+        obj_list = []
+        if len(args) == 0:
+            for value in models.storage.all().values():
+                obj_list.append(str(value))
+            print("[", end="")
+            print(", ".join(obj_list), end="")
+            print("]")
+        elif args[0] in allowed_class:
+            for key in models.storage.all():
+                if args[0] in key:
+                    obj_list.append(str(models.storage.all()[key]))
+            print("[", end="")
+            print(", ".join(obj_list), end="")
+            print("]")
         else:
-            print('["', end="")
-            # result = []
-            flag = 0
-            len_class = len(cmd_line[0])
-            for obj_id in models.storage.all().keys():
-                if obj_id[:len_class] == cmd_line[0]:
-                    if flag == 1:
-                        print('", "', end="")
-                    obj = models.storage.all()[obj_id]
-                    print(obj, end="")
-                    flag = 1
-            print('"]')
+            print("** class doesn't exist **")
 
     def do_update(self, line):
         """Updates an instance based on the class name and id
