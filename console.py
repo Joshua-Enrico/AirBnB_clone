@@ -16,6 +16,7 @@ allowed_class = {"BaseModel": BaseModel, "Place": Place, "State": State,
                  "City": City, "Amenity": Amenity, "Review": Review,
                  "User": User}
 
+
 class HBNBCommand(cmd.Cmd):
     """
     HBNB Class
@@ -42,47 +43,32 @@ class HBNBCommand(cmd.Cmd):
         cmd2 = tmp2[0]
         tmp3 = tmp2[1].split(")")
         cmd3 = tmp3[0].split(",", 1)
-        # cmd3 = tmp3[0]
-        # print(cmd1)
-        # print(cmd2)
-        # print(cmd3)
-        # print("---------")
+
         if (len(cmd3[0]) == 0):
             line = cmd2 + " " + cmd1
         else:
-            line = cmd2 + " " + cmd1
-            cmd_id = cmd3[0]
-            dicty = cmd3[1].replace('{', ' ').replace(':', ' ').replace('}', ' ')
-            dicty.split()
-            i = 0
-            for i in range(0, len(dicty)):
-                if i == ',':
-                    print(dicty[:i])
-            # for k, v in dicty.items(): doesn't work
-            #    print("{} {} {} {}".format(line, cmd_id. k, v))
-            # dicty = cmd3[1].replace('{', ' ').replace(':', ' ').replace(',', ' ').replace('}', ' ')
-            # dicty.split()
-            # print(cmd_id)
-            # print("---------")
-            print(dicty)
-            # line = " ".join(dicty)
+            cmd_id = cmd3[0].replace('"', '')
+            line = cmd2 + " " + cmd1 + " " + cmd_id
+            dicty = cmd3[1].replace('{', ' ').replace(':', ' ') \
+                .replace(',', ' ').replace('}', ' ') \
+                .replace("'", ' ').replace('"', ' ')
+            dicty = dicty.split()
+
+            flag = 0
+            for n in dicty:
+                if flag == 0:
+                    line = line + ' ' + n
+                    flag = 1
+                elif flag == 1:
+                    line = line + ' ' + '"' + n + '"'
+                    flag = 0
             # print(line)
-            return
 
         return cmd.Cmd.precmd(self, line)
 
-        """
-        if not sys.stdin.isatty():
-            print()
-        if '.' in line:
-            line = line.replace('.', ' ').replace('(', ' ').replace(')', ' ')
-            cmd_argv = line.split()
-            cmd_argv[0], cmd_argv[1] = cmd_argv[1], cmd_argv[0]
-            line = " ".join(cmd_argv)
-        return cmd.Cmd.precmd(self, line)"""
-
     def do_create(self, line):
-        """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
+        """Creates a new instance of BaseModel, saves it (to the JSON file)
+            and prints the id"""
         string = line + "()"
         if len(line) == 0:
             print("** class name missing **")
@@ -105,11 +91,12 @@ class HBNBCommand(cmd.Cmd):
             return
 
         print(instance.id)
-        instance.save() 
+        instance.save()
         """
 
     def do_show(self, line):
-        """Prints the string representation of an instance based on the class name and id.
+        """Prints the string representation of an instance
+            based on the class name and id.
             Ex: $ show BaseModel 1234-1234-1234."""
         cmd_line = line.split()
         if len(cmd_line) == 0:
@@ -127,7 +114,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id (save the change into the JSON file).
+        """Deletes an instance based on the class name and
+        id (save the change into the JSON file).
         Ex: $ destroy BaseModel 1234-1234-1234"""
         cmd_line = line.split()
         if len(cmd_line) == 0:
@@ -146,7 +134,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, line):
-        """Prints all string representation of all instances based or not on the class name.
+        """Prints all string representation of all instances
+            based or not on the class name.
             Ex: $ all BaseModel or $ all."""
         cmd_line = line.split()
         if cmd_line[0] not in allowed_class.keys():
@@ -164,10 +153,13 @@ class HBNBCommand(cmd.Cmd):
                 print('"]')
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by adding or updating attribute
+        """Updates an instance based on the class name and id
+            by adding or updating attribute
             (save the change into the JSON file).
-            - Usage: update <class name> <id> <attribute name> "<attribute value>"
-            - Ex: $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
+            - Usage:
+            update <class name> <id> <attribute name> "<attribute value>"
+            - Ex:
+            $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
             - Only one attribute can be updated at the time"""
         cmd_line = line.split()
         if len(cmd_line[0]) == 0:
