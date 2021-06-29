@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
             Ex: $ all BaseModel or $ all."""
         cmd_line = line.split()
         if len(cmd_line) == 0 or cmd_line[0] == "BaseModel":
-            print('[', end="")
+            print('["', end="")
             flag = 0
             for obj_id in models.storage.all().keys():
                 if flag == 1:
@@ -139,11 +139,11 @@ class HBNBCommand(cmd.Cmd):
                 obj = models.storage.all()[obj_id]
                 print(obj, end="")
                 flag = 1
-            print(']')
+            print('"]')
         elif cmd_line[0] not in allowed_class.keys():
             print("** class doesn't exist **")
         else:
-            print('[', end="")
+            print('["', end="")
             # result = []
             flag = 0
             len_class = len(cmd_line[0])
@@ -154,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
                     obj = models.storage.all()[obj_id]
                     print(obj, end="")
                     flag = 1
-            print(']')
+            print('"]')
 
     def do_update(self, line):
         """Updates an instance based on the class name and id
