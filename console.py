@@ -176,9 +176,9 @@ class HBNBCommand(cmd.Cmd):
             instance = cmd_line[0] + "." + cmd_line[1]
             if instance not in models.storage.all():
                 print("** no instance found **")
-            elif len(cmd_line[2]) == 0:
+            elif len(cmd_line) < 3:
                 print("** attribute name missing **")
-            elif len(cmd_line[3]) == 0:
+            elif len(cmd_line) < 3:
                 print("** value missing **")
             else:
                 if cmd_line[2] != "id" and cmd_line[2] \
