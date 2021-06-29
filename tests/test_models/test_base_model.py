@@ -3,6 +3,7 @@
 from datetime import datetime
 import time
 import unittest
+# from pep8 import pycodestyle
 import models
 import inspect
 from unittest import mock
@@ -18,6 +19,14 @@ class TestDocs(unittest.TestCase):
         """Setup for dosctring"""
         self.base_f = inspect.getmembers(BaseModel, inspect.isfunction)
 
+    # def testing_pep8(self):
+    # """testing that BaseModel.py passes pep8"""
+    # for path in ['models/base_model.py',
+    # "tests/test_models/test_base_model.py"]:
+    # with self.suptest(path=path):
+    # err = pycodestyle.Checker(path).check_all()
+    # self.assertEqual(err, 0)
+
     def test_module_docstring(self):
         """Test for the existence of module docstring"""
         self.assertIsNot(mod_doc, None,
@@ -31,6 +40,7 @@ class TestDocs(unittest.TestCase):
                          "base_model.py needs a doctring")
         self.assertTrue(len(mod_doc) > 1,
                         "base_model.py needs a docstring")
+
 
 class TestBaseModel(unittest.TestCase):
     """testing BaseModel Class"""
@@ -48,7 +58,7 @@ class TestBaseModel(unittest.TestCase):
             "name": str,
             "number": int
         }
-        #testing types and attr names
+        # testing types and attr names
         for attr, types in expectec_attrs_types.items():
             with self.subTest(attr=attr, typ=types):
                 self.assertIn(attr, instance.__dict__)
@@ -63,7 +73,8 @@ class TestBaseModel(unittest.TestCase):
         created_at = datetime.now()
         instance1 = BaseModel()
         updated_at = datetime.now()
-        self.assertEqual(created_at <= instance1.created_at <= updated_at, True)
+        self.assertEqual(created_at <= instance1.created_at
+                         <= updated_at, True)
         time.sleep(1)
         created_at = datetime.now()
         instance2 = BaseModel()
@@ -73,7 +84,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(instance2.updated_at, instance2.updated_at)
         self.assertNotEqual(instance1.created_at, instance2.created_at)
         self.assertNotEqual(instance1.updated_at, instance2.updated_at)
-
 
     def test_uuid(self):
         """testing uuid"""
@@ -103,7 +113,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(new_inst['name'], 'Holbies')
         self.assertEqual(new_inst['my_number'], 89)
 
-
     def test_str_method(self):
         """testing str method, checking output"""
         instance4 = BaseModel()
@@ -112,7 +121,8 @@ class TestBaseModel(unittest.TestCase):
 
     @mock.patch('models.storage')
     def test_save_method(self, mock_storage):
-        """test save method and if it updates "updated_at" calling storage.save"""
+        """test save method and if it updates
+        "updated_at" calling storage.save"""
         instance4 = BaseModel()
         created_at = instance4.created_at
         updated_at = instance4.updated_at
