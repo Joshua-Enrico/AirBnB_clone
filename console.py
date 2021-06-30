@@ -17,6 +17,7 @@ allowed_class = {"BaseModel": BaseModel, "Place": Place, "State": State,
                  "City": City, "Amenity": Amenity, "Review": Review,
                  "User": User}
 
+
 class HBNBCommand(cmd.Cmd):
     """
     HBNB Class
@@ -47,8 +48,6 @@ class HBNBCommand(cmd.Cmd):
             cmd2 = tmp[1]
             tmp3 = split_line[1].split(")")
             cmd3 = tmp3[0].split(",", 1)
-            print(cmd3)
-
             if (len(cmd3[0]) == 0):
                 line = cmd2 + " " + cmd1
             else:
@@ -64,13 +63,15 @@ class HBNBCommand(cmd.Cmd):
 
                     flag = 0
                     for n in dicty:
+                        init = cmd1 + " " + cmd_id
                         if flag == 0:
-                            line = line + ' ' + n
+                            line = init + ' ' + n
                             flag = 1
                         elif flag == 1:
                             line = line + ' ' + '"' + n + '"'
                             flag = 0
-                    print(line)
+                            self.do_update(line)
+                    line = ""
         else:
             line = line
         # print(line)
