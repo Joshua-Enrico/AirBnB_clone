@@ -253,6 +253,10 @@ class ShowTest(unittest.TestCase):
     def test_update(self):
         """Testing update's behaviour"""
         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        id = f.getvalue()
+
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update")
             self.assertEqual(
                 "** class name missing **\n", f.getvalue())
@@ -280,3 +284,17 @@ class ShowTest(unittest.TestCase):
             HBNBCommand().onecmd("update User " + my_id + " Name")
             self.assertEqual(
                 "** value missing **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update User " + id + " name " + "Goku")
+        self.assertEqual(f.getvalue(), '')
+        with patch('sys.stdout', new=StringIO()) as f:
+            expectect = "*** Unknown syntax: asdasd.update()\n"
+            HBNBCommand().onecmd("asdasd.update()".format(id))
+        self.assertEqual(f.getvalue(), expectect)
+        with patch('sys.stdout', new=StringIO()) as f:
+            expectect = "*** Unknown syntax: User.update()\n"
+            HBNBCommand().onecmd("User.update()".format(id))
+        self.assertEqual(f.getvalue(), expectect)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.update(\"{}\", \'name\', \"Goku\")".
+                                 format(id))
