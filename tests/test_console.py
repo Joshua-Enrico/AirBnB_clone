@@ -111,8 +111,8 @@ class HelpTest(unittest.TestCase):
 
     def create_help_command(self):
         """test commands: help create"""
-        expected = 'Creates a new instance of BaseModel, saves it (to the JSON file)\n \
-            and prints the id\n'
+        expected = 'Creates a new instance of BaseModel, saves it \n \
+            (to the JSON file) and prints the id\n'
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help create")
             self.assertEqual(expected, f.getvalue())
