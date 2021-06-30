@@ -43,6 +43,13 @@ class ConsoleTest(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.do_update.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
 
+    def test_non_exist_command(self):
+        """testing a command that doesn't exist"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("goku")
+            self.assertEqual('*** Unknown syntax: goku\n',
+                             f.getvalue())
+
     def test_empty_line(self):
         """testing empty input"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -54,13 +61,6 @@ class ConsoleTest(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("quit")
             self.assertEqual('', f.getvalue())
-
-    def test_non_exist_command(self):
-        """testing a command that doesn't exist"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("goku")
-            self.assertEqual('*** Unknown syntax: goku\n',
-                             f.getvalue())
 
 
 class HelpTest(unittest.TestCase):
@@ -74,12 +74,12 @@ class HelpTest(unittest.TestCase):
     def help_command(self):
         """testing an only help command"""
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("help")
+            self.console.onecmd("help")
             output = '\nDocumented commands (type help <topic>)[103 chars]\n\n'
             self.assertEqual(output, f.getvalue())
 
     def help_help_command(self):
-        """testing an only help command"""
+        """test commands: help help"""
         expected = 'List available commands with "help" or \
             detailed help with "help cmd".\n'
         with patch('sys.stdout', new=StringIO()) as f:
@@ -87,14 +87,14 @@ class HelpTest(unittest.TestCase):
             self.assertEqual(expected, f.getvalue())
 
     def EOF_help_command(self):
-        """testing an only help command"""
+        """test commands: help EOF"""
         expected = 'End of File command: exit the program\n'
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help EOF")
             self.assertEqual(expected, f.getvalue())
 
     def all_help_command(self):
-        """testing an only help command"""
+        """test commands: help all"""
         expected = 'Prints all string representation of all instances \
             based or not on the class name \
             Ex: $ all BaseModel or $ all.\n'
@@ -103,14 +103,14 @@ class HelpTest(unittest.TestCase):
             self.assertEqual(expected, f.getvalue())
 
     def count_help_command(self):
-        """testing an only help command"""
+        """test commands: help count"""
         expected = 'count instances of the class\n'
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help count")
             self.assertEqual(expected, f.getvalue())
 
     def create_help_command(self):
-        """testing an only help command"""
+        """test commands: help create"""
         expected = 'Creates a new instance of BaseModel, saves it (to the JSON file)\n \
             and prints the id\n'
         with patch('sys.stdout', new=StringIO()) as f:
@@ -118,14 +118,14 @@ class HelpTest(unittest.TestCase):
             self.assertEqual(expected, f.getvalue())
 
     def quit_help_command(self):
-        """testing an only help command"""
+        """test commands: help quit"""
         expected = 'quit command: exit the program\n'
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help quit")
             self.assertEqual(expected, f.getvalue())
 
     def destroy_help_command(self):
-        """testing an only help command"""
+        """test commands: help destroy"""
         expected = 'Deletes an instance based on the class name and\n \
         id (save the change into the JSON file).\n \
         Ex: $ destroy BaseModel 1234-1234-1234\n'
@@ -134,7 +134,7 @@ class HelpTest(unittest.TestCase):
             self.assertEqual(expected, f.getvalue())
 
     def show_help_command(self):
-        """testing an only help command"""
+        """test commands: help show"""
         expected = 'Prints the string representation of an instance\n \
             based on the class name and id.\n \
             Ex: $ show BaseModel 1234-1234-1234.'
@@ -143,7 +143,7 @@ class HelpTest(unittest.TestCase):
             self.assertEqual(expected, f.getvalue())
 
     def update_help_command(self):
-        """testing an only help command"""
+        """test commands: help update"""
         expected = 'Updates an instance based on the class name and id\n \
             by adding or updating attribute\n \
             (save the change into the JSON file).\n \
