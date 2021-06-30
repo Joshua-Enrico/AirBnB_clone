@@ -44,7 +44,7 @@ class ConsoleTest(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.default.__doc__)
 
     def test_non_exist_command(self):
-        """testing a command that doesn't exist"""
+        """testing a command that doesn't exist like goku"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("goku")
             self.assertEqual('*** Unknown syntax: goku\n' or '',
