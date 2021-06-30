@@ -58,8 +58,8 @@ class ConsoleTest(unittest.TestCase):
     def test_non_exist_command(self):
         """testing a command that doesn't exist"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("goku")
-            self.assertEqual('',
+            HBNBCommand().onecmd("goku")
+            self.assertEqual('*** Unknown syntax: goku\n',
                              f.getvalue())
 
     def test_create(self):
