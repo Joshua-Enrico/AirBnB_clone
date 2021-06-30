@@ -55,6 +55,13 @@ class ConsoleTest(unittest.TestCase):
             self.console.onecmd("quit")
             self.assertEqual('', f.getvalue())
 
+    def test_non_exist_command(self):
+        """testing a command that doesn't exist"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("goku")
+            self.assertEqual('',
+                             f.getvalue())
+
     def test_create(self):
         """testing creat input"""
         with patch('sys.stdout', new=StringIO()) as f:
