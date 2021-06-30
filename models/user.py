@@ -9,3 +9,7 @@ class User(BaseModel):
     password = ""
     first_name = ""
     last_name = ""
+
+    def __ini__(self, *args, **kwargs):
+        """Inicializes giving id and datetime"""
+        super().__ini__(*args, **kwargs)
