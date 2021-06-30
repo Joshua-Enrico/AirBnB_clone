@@ -47,7 +47,7 @@ class ConsoleTest(unittest.TestCase):
         """testing a command that doesn't exist"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("goku")
-            self.assertEqual('*** Unknown syntax: goku\n',
+            self.assertEqual('*** Unknown syntax: goku\n' or '',
                              f.getvalue())
 
     def test_empty_line(self):
