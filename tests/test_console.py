@@ -183,6 +183,16 @@ class CreateTest(unittest.TestCase):
             HBNBCommand().onecmd("all User")
             self.assertEqual(
                             '["[User', f.getvalue()[:7])
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create BaseModel")
+        self.assertRegex(f.getvalue(), '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5]'
+                                       '[0-9a-f]{3}-[89ab][0-9a-f]{3}-'
+                                       '[0-9a-f]{12}$')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        self.assertRegex(f.getvalue(), '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5]'
+                                       '[0-9a-f]{3}-[89ab][0-9a-f]{3}-'
+                                       '[0-9a-f]{12}$')
 
 
 class ShowTest(unittest.TestCase):
