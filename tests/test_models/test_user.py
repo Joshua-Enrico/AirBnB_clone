@@ -1,168 +1,117 @@
 #!/usr/bin/python3
-"""Test User Class - Comproving expectect outputs and documentation
+"""
+Contains the TestUserDocs classes
 """
 
 from datetime import datetime
-import models
-# from pep8 import pycodestyle
 import inspect
+from models import user
+from models.base_model import BaseModel
+import pep8
 import unittest
-from unittest import mock
-import time
+User = user.User
 
 
-User = models.user.User
-mod_doc = models.user.__doc__
-
-
-class TestDocs(unittest.TestCase):
-    """Test documentation and style"""
+class TestUserDocs(unittest.TestCase):
+    """Tests to check the documentation and style of User class"""
     @classmethod
-    def setUpClass(self):
-        """Setup for dosctring"""
-        user_i = inspect.getmembers(User, inspect.isfunction)
+    def setUpClass(cls):
+        """Set up for the doc tests"""
+        cls.user_f = inspect.getmembers(User, inspect.isfunction)
 
-    def testing_pep8(self):
-        """Testing that models_user.py passes pep8 """
+    def test_pep8_conformance_user(self):
+        """Test that models/user.py conforms to PEP8."""
+        pep8s = pep8.StyleGuide(quiet=True)
+        result = pep8s.check_files(['models/user.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
-    # def test_pep8(self):
-    # """testing that User class passes pep8 requirments"""
-    # for path in ['models/user.py', 'tests/tests_models/test_user.py']:
-    # with self.subTest(path=path):
-    # err = pycodestyle.Checker(path).check_all()
-    # self.assertEqual(err, 0)
+    def test_pep8_conformance_test_user(self):
+        """Test that tests/test_models/test_user.py conforms to PEP8."""
+        pep8s = pep8.StyleGuide(quiet=True)
+        result = pep8s.check_files(['tests/test_models/test_user.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
-    def test_module_docstring(self):
-        """Test for the existence of module docstring"""
-        self.assertIsNot(mod_doc, None,
-                         "base_model.py needs a docstring")
-        self.assertTrue(len(mod_doc) > 1,
-                        "base_model.py needs a docstring")
+    def test_user_module_docstring(self):
+        """Test for the user.py module docstring"""
+        self.assertIsNot(user.__doc__, None,
+                         "user.py needs a docstring")
+        self.assertTrue(len(user.__doc__) >= 1,
+                        "user.py needs a docstring")
 
-    def test_dosctring(self):
-        """Testing documentation"""
-        self.assertIsNot(mod_doc, None,
-                         "base_model.py needs a doctring")
-        self.assertTrue(len(mod_doc) > 1,
-                        "base_model.py needs a docstring")
+    def test_user_class_docstring(self):
+        """Test for the City class docstring"""
+        self.assertIsNot(User.__doc__, None,
+                         "User class needs a docstring")
+        self.assertTrue(len(User.__doc__) >= 1,
+                        "User class needs a docstring")
+
+    def test_user_func_docstrings(self):
+        """Test for the presence of docstrings in User methods"""
+        for func in self.user_f:
+            self.assertIsNot(func[1].__doc__, None,
+                             "{:s} method needs a docstring".format(func[0]))
+            self.assertTrue(len(func[1].__doc__) >= 1,
+                            "{:s} method needs a docstring".format(func[0]))
 
 
-class TestBaseModel(unittest.TestCase):
-    """testing BaseModel Class"""
-    @mock.patch('models.storage')
-    def test_instances(self, mock_storage):
-        """Testing that object is correctly created"""
-        instance = User()
-        self.assertIs(type(instance), User)
-        instance.name = "Holberton"
-        instance.number = 89
-        instance.email = "Holberton@holbertonshool.com"
-        instance.password = "tubbcito-plumplum"
-        instance.first_name = "joshua"
-        instance.last_name = "joshua2"
+class TestUser(unittest.TestCase):
+    """Test the User class"""
+    def test_is_subclass(self):
+        """Test that User is a subclass of BaseModel"""
+        user = User()
+        self.assertIsInstance(user, BaseModel)
+        self.assertTrue(hasattr(user, "id"))
+        self.assertTrue(hasattr(user, "created_at"))
+        self.assertTrue(hasattr(user, "updated_at"))
 
-        expectec_attrs_types = {
-            "id": str,
-            "created_at": datetime,
-            "updated_at": datetime,
-            "name": str,
-            "number": int,
-            "email": str,
-            "password": str,
-            "first_name": str,
-            "last_name": str
-        }
-        # testing types and attr names
-        for attr, types in expectec_attrs_types.items():
-            with self.subTest(attr=attr, typ=types):
-                self.assertIn(attr, instance.__dict__)
-                self.assertIs(type(instance.__dict__[attr]), types)
-        self.assertTrue(mock_storage.new.called)
-        self.assertEqual(instance.name, "Holberton")
-        self.assertEqual(instance.number, 89)
-        self.assertEqual(instance.email, "Holberton@holbertonshool.com")
-        self.assertEqual(instance.first_name, "joshua")
-        self.assertEqual(instance.last_name, "joshua2")
+    def test_email_attr(self):
+        """Test that User has attr email, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "email"))
+        self.assertEqual(user.email, "")
 
-    def test_datetime(self):
-        """testing correct datetime assignation
-        correct assignation of created_at and updated_at"""
-        created_at = datetime.now()
-        instance1 = User()
-        updated_at = datetime.now()
-        self.assertEqual(created_at <= instance1.created_at
-                         <= updated_at, True)
-        time.sleep(1)
-        created_at = datetime.now()
-        instance2 = User()
-        updated_at = datetime.now()
-        self.assertTrue(created_at <= instance2.created_at <= updated_at, True)
-        self.assertEqual(instance1.created_at, instance1.created_at)
-        self.assertEqual(instance2.updated_at, instance2.updated_at)
-        self.assertNotEqual(instance1.created_at, instance2.created_at)
-        self.assertNotEqual(instance1.updated_at, instance2.updated_at)
+    def test_password_attr(self):
+        """Test that User has attr password, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "password"))
+        self.assertEqual(user.password, "")
 
-    def test_uuid(self):
-        """testing uuid"""
-        instance1 = User()
-        instance2 = User()
-        for instance in [instance1, instance2]:
-            tuuid = instance.id
-            with self.subTest(uuid=tuuid):
-                self.assertIs(type(tuuid), str)
+    def test_first_name_attr(self):
+        """Test that User has attr first_name, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "first_name"))
+        self.assertEqual(user.first_name, "")
 
-        self.assertNotEqual(instance1.id, instance2.id)
+    def test_last_name_attr(self):
+        """Test that User has attr last_name, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "last_name"))
+        self.assertEqual(user.last_name, "")
 
-    def test_dictionary(self):
-        """testing to_dict correct funtionality"""
-        """Testing that object is correctly created"""
-        instance3 = User()
-        self.assertIs(type(instance3), User)
-        instance3.name = "Holbies"
-        instance3.number = 89
-        instance3.email = "Holberton@holbertonshool.com"
-        instance3.password = "tubbcito-plumplum"
-        instance3.first_name = "joshua"
-        instance3.last_name = "joshua2"
-        new_inst = instance3.to_dict()
-        expectec_attrs = ["id",
-                          "created_at",
-                          "updated_at",
-                          "name",
-                          "number",
-                          "email",
-                          "password",
-                          "first_name",
-                          "last_name",
-                          "__class__"]
-        self.assertCountEqual(new_inst.keys(), expectec_attrs)
-        self.assertEqual(new_inst['__class__'], 'User')
-        self.assertEqual(new_inst['last_name'], 'joshua2')
-        self.assertEqual(new_inst['first_name'], 'joshua')
-        self.assertEqual(new_inst['name'], 'Holbies')
-        self.assertEqual(new_inst['number'], 89)
-        self.assertEqual(new_inst['email'], 'Holberton@holbertonshool.com')
-        self.assertEqual(new_inst['password'], 'tubbcito-plumplum')
+    def test_to_dict_creates_dict(self):
+        """test to_dict method creates a dictionary with proper attrs"""
+        u = User()
+        new_d = u.to_dict()
+        self.assertEqual(type(new_d), dict)
+        for attr in u.__dict__:
+            self.assertTrue(attr in new_d)
+            self.assertTrue("__class__" in new_d)
 
-    def test_str_method(self):
-        """testing str method, checking output"""
-        instance4 = User()
-        strr = "[User] ({}) {}".format(instance4.id, instance4.__dict__)
-        self.assertEqual(strr, str(instance4))
+    def test_to_dict_values(self):
+        """test that values in dict returned from to_dict are correct"""
+        t_format = "%Y-%m-%dT%H:%M:%S.%f"
+        u = User()
+        new_d = u.to_dict()
+        self.assertEqual(new_d["__class__"], "User")
+        self.assertEqual(type(new_d["created_at"]), str)
+        self.assertEqual(type(new_d["updated_at"]), str)
+        self.assertEqual(new_d["created_at"], u.created_at.strftime(t_format))
+        self.assertEqual(new_d["updated_at"], u.updated_at.strftime(t_format))
 
-    @mock.patch('models.storage')
-    def test_save_method(self, mock_storage):
-        """test save method and if it updates
-        "updated_at" calling storage.save"""
-        instance4 = User()
-        created_at = instance4.created_at
-        updated_at = instance4.updated_at
-        instance4.save()
-        new_created_at = instance4.created_at
-        new_updated_at = instance4.updated_at
-        self.assertNotEqual(updated_at, new_updated_at)
-        self.assertEqual(created_at, new_created_at)
-        self.assertTrue(mock_storage.save.called)
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_str(self):
+        """test that the str method has the correct output"""
+        user = User()
+        string = "[User] ({}) {}".format(user.id, user.__dict__)
+        self.assertEqual(string, str(user))
