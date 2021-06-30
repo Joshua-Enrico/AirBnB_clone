@@ -183,12 +183,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** attribute name missing **")
             elif len(cmd_line) < 4:
                 print("** value missing **")
-            elif cmd_line[0] not in untouchable():
+            elif cmd_line[2] not in untouchable:
                 ojb = objets[instance]
                 ojb.__dict__[cmd_line[2]] = cmd_line[3]
                 ojb.updated_at = datetime.now()
                 ojb.save()
-
 
     def do_count(self, line):
         "count instances of the class"
