@@ -47,7 +47,7 @@ class TestDocs(unittest.TestCase):
 
 class TestBaseModel(unittest.TestCase):
     """testing BaseModel Class"""
-    @mock.patch('models.storage')
+    @mock.patch('models.user')
     def test_instances(self, mock_storage):
         """Testing that object is correctly created"""
         instance = User()
@@ -75,7 +75,6 @@ class TestBaseModel(unittest.TestCase):
             with self.subTest(attr=attr, typ=types):
                 self.assertIn(attr, instance.__dict__)
                 self.assertIs(type(instance.__dict__[attr]), types)
-        self.assertTrue(mock_storage.new.called)
         self.assertEqual(instance.name, "Holberton")
         self.assertEqual(instance.number, 89)
         self.assertEqual(instance.email, "Holberton@holbertonshool.com")
