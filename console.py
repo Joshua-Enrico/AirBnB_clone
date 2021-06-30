@@ -3,6 +3,7 @@
 Class CommandConsole for Airbnb
 """
 import cmd
+from datetime import datetime
 from models.base_model import BaseModel
 from models.place import Place
 from models.state import State
@@ -165,8 +166,10 @@ class HBNBCommand(cmd.Cmd):
             - Ex:
             $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
             - Only one attribute can be updated at the time"""
-        cmd_line = line.split()
-        if not cmd_line:
+        cmd_line = line.split(" ")
+        untouchable = ["id", "created_at", "updated_at"]
+        objets = models.storage.all()
+        if not line:
             print("** class name missing **")
         elif cmd_line[0] not in allowed_class.keys():
             print("** class doesn't exist **")
@@ -178,14 +181,14 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             elif len(cmd_line) < 3:
                 print("** attribute name missing **")
-            elif len(cmd_line) < 3:
+            elif len(cmd_line) < 4:
                 print("** value missing **")
-            else:
-                if cmd_line[2] != "id" and cmd_line[2] \
-                        != "created_at" and cmd_line[2] != "updated_at":
-                    select_obj = models.storage.all().get(instance)
-                    setattr(select_obj, cmd_line[2], cmd_line[3][1:-1])
-                    select_obj.save()
+            elif cmd_line[0] not in untouchable():
+                ojb = objets[instance]
+                ojb.__dict__[cmd_line[2]] = cmd_line[3]
+                ojb.updated_at = datetime.now()
+                ojb.save()
+
 
     def do_count(self, line):
         "count instances of the class"
