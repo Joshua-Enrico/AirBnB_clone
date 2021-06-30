@@ -166,7 +166,7 @@ class HBNBCommand(cmd.Cmd):
             - Ex:
             $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
             - Only one attribute can be updated at the time"""
-        cmd_line = line.split(" ")
+        cmd_line = line.split()
         untouchable = ["id", "created_at", "updated_at"]
         objets = models.storage.all()
         if not line:
