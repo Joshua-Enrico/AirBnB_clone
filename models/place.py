@@ -16,7 +16,3 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = ''
-
-    def __ini__(self, *args, **kwargs):
-        """Inicializes giving id and datetime"""
-        super().__ini__(*args, **kwargs)
