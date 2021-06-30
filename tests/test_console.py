@@ -240,17 +240,43 @@ class ShowTest(unittest.TestCase):
             HBNBCommand().onecmd("destroy User 123123")
             self.assertEqual("** no instance found **\n",
                              f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.destroy(1)")
+            expectet = "*** Unknown syntax: User.destroy(1)\n"
+        self.assertEqual(f.getvalue(), expectet)
 
     def test_all(self):
-        """Test all command inpout"""
+        """Validate show in both ways"""
+        try:
+            os.remove("file.json")
+        except:
+            pass
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all")
+        self.assertNotEqual(f.getvalue(), '')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all BaseModel")
+        self.assertNotEqual(f.getvalue(), '')
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all 123123")
             self.assertEqual("** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all State")
             self.assertEqual('["[Stat', f.getvalue()[:7])
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("ssss.all()")
+        self.assertEqual(f.getvalue(), '*** Unknown syntax: ssss.all()\n')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.all(dasds)")
+        self.assertEqual(f.getvalue(), '*** Unknown syntax: User.all(dasds)\n')
+
 
     def test_update(self):
+        """Validate all both ways"""
+        try:
+            os.remove("file.json")
+        except:
+            pass
         """Testing update's behaviour"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create User")
@@ -295,6 +321,36 @@ class ShowTest(unittest.TestCase):
             expectect = "*** Unknown syntax: User.update()\n"
             HBNBCommand().onecmd("User.update()".format(id))
         self.assertEqual(f.getvalue(), expectect)
+
+    def test_count(self):
+        """Validate count method"""
+        try:
+            os.remove("file.json")
+        except:
+            pass
+
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("User.update(\"{}\", \'name\', \"Goku\")".
-                                 format(id))
+            HBNBCommand().onecmd("create User")
+            HBNBCommand().onecmd("create BaseModel")
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.count()")
+        self.assertNotEqual(f.getvalue(), '')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("id.count()")
+            expectect = "*** Unknown syntax: id.count()\n"
+        self.assertEqual(f.getvalue(), expectect)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.count(d)")
+        self.assertEqual(f.getvalue(), '*** Unknown syntax: User.count(d)\n')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.count()d")
+        self.assertEqual(f.getvalue(), '*** Unknown syntax: User.count()d\n')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("count")
+        self.assertEqual(f.getvalue(), '0\n')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("count id")
+        self.assertEqual(f.getvalue(), '0\n')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("count BaseModel id")
+        self.assertEqual(f.getvalue(), '0\n')
