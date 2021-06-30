@@ -17,7 +17,6 @@ allowed_class = {"BaseModel": BaseModel, "Place": Place, "State": State,
                  "City": City, "Amenity": Amenity, "Review": Review,
                  "User": User}
 
-
 class HBNBCommand(cmd.Cmd):
     """
     HBNB Class
@@ -38,14 +37,17 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         """ Edit given command to allow second type of input"""
-        tmp = line.split(".")
-        trust = line.split("{")
-        if (len(trust) >= 2):
+        split_line = line.split("(")
+        flag_instance = 0
+        if(len(split_line) > 1):
+            tmp = split_line[0].split(".", 1)
+            flag_instance = 1
+        if (flag_instance == 1):
             cmd1 = tmp[0]
-            tmp2 = tmp[1].split("(")
-            cmd2 = tmp2[0]
-            tmp3 = tmp2[1].split(")")
+            cmd2 = tmp[1]
+            tmp3 = split_line[1].split(")")
             cmd3 = tmp3[0].split(",", 1)
+            print(cmd3)
 
             if (len(cmd3[0]) == 0):
                 line = cmd2 + " " + cmd1
@@ -68,6 +70,7 @@ class HBNBCommand(cmd.Cmd):
                         elif flag == 1:
                             line = line + ' ' + '"' + n + '"'
                             flag = 0
+                    print(line)
         else:
             line = line
         # print(line)
