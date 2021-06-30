@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Test User Class - Comproving expectect outputs and documentation
 """
-
-from datetime import datetime
 import models
+from datetime import datetime
+from models.user import User
 import pep8
 import inspect
 import unittest
@@ -11,7 +11,7 @@ from unittest import mock
 import time
 
 
-User = models.user.User
+User = User
 mod_doc = models.user.__doc__
 
 
