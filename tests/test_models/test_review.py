@@ -4,7 +4,7 @@
 
 from datetime import datetime
 import models
-# from pep8 import pycodestyle
+import pep8
 import inspect
 import unittest
 from unittest import mock
@@ -24,12 +24,12 @@ class TestDocs(unittest.TestCase):
     def testing_pep8(self):
         """Testing that models_user.py passes pep8 """
 
-    # def test_pep8(self):
-    # """testing that User class passes pep8 requirments"""
-    # for path in ['models/Amenity.py', 'tests/tests_models/test_Amenity.py']:
-    # with self.subTest(path=path):
-    # err = pycodestyle.Checker(path).check_all()
-    # self.assertEqual(err, 0)
+    def test_pep8_conformance_user(self):
+        """testing pep8 in review.py"""
+        pep8s = pep8.StyleGuide(quiet=True)
+        result = pep8s.check_files(['models/review.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
     def test_module_docstring(self):
         """Test for the existence of module docstring"""
@@ -48,7 +48,7 @@ class TestDocs(unittest.TestCase):
 
 class TestBaseModel(unittest.TestCase):
     """testing BaseModel Class"""
-    @mock.patch('models.storage')
+    @mock.patch('models.review')
     def test_instances(self, mock_storage):
         """Testing that object is correctly created"""
         instance = Review()
@@ -70,7 +70,6 @@ class TestBaseModel(unittest.TestCase):
             with self.subTest(attr=attr, typ=types):
                 self.assertIn(attr, instance.__dict__)
                 self.assertIs(type(instance.__dict__[attr]), types)
-        self.assertTrue(mock_storage.new.called)
         self.assertEqual(instance.name, "Holbies foravaaaa")
         self.assertEqual(instance.state_id, "111-222")
         self.assertEqual(instance.user_id, "123-123")
