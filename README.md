@@ -289,7 +289,7 @@ More than one command:
 1.0|[engine](./models/engine)|directory of Store first object|The first way you will see here is to save these objects to a file with dictionaries: ```<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>```
 1.1|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
 1.2|[amenity.py](./models/engine/amenity.py)|Amenity class| Inherits from BaseModel and contains specific public attributes
-1.3|[base_model.py](./models/engine/base_model.py)| Base Model class| Inherits from BaseModel and contains specific public attributes
+1.3|[base_model.py](./models/engine/base_model.py)| Base Model class|  Defines all common attributes/methods for other classes sach as id, datetime
 1.4|[city.py](./models/engine/city.py)|City Class| Inherits from BaseModel and contains specific public attributes
 1.5|[place.py](./models/engine/place.py)|Place Class| Inherits from BaseModel and contains specific public attributes
 1.6|[review.py](./models/engine/review.py)|Review Class| Inherits from BaseModel and contains specific public attributes
