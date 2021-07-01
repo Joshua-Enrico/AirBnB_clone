@@ -127,7 +127,7 @@ Quit command to exit the program
 guillaume@ubuntu:~/AirBnB$ 
 ```
 
-##|Commands|how to use it|Instance form|Description
+##|Commands|how to use it in the command interpreter|Instance form|Description
 ---|---|---|---|---
 0.0|quit|```quit```||Exit the program
 0.1|EOF|```EOF```||Exit the program
@@ -150,19 +150,151 @@ f|Amenity|```Amenity```
 g|Review|```Review```
 h|User|```User```
 
+#### Examples:
+
+* help:
+
+```
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+```
+
+* quit and EOF: quits
+
+```
+(hbnb) quit 
+vagrant@ubuntu:~/AirBnB$ 
+```
+
+```
+(hbnb) quit 
+vagrant@ubuntu:~/AirBnB$ 
+```
+
+* create:
+
+```
+(hbnb) create BaseModel
+2dd6ef5c-467c-4f82-9521-a772ea7d84e9
+(hbnb) create User
+35dd5991-c54f-4e33-a4c4-2be5219cc15e
+```
+
+* all:
+
+```
+(hbnb) all BaseModel
+["[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '49faff9a-6318-451f-87b6-910505c55907', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}"]
+```
+
+* show:
+
+```
+(hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
+[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '49faff9a-6318-451f-87b6-910505c55907', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}
+```
+
+* destroy:
+
+```
+(hbnb) destroy
+** class name missing **
+```
+
+* update:
+
+```
+(hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
+[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '49faff9a-6318-451f-87b6-910505c55907', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}
+(hbnb) update BaseModel 49faff9a-6318-451f-87b6-910505c55907 first_name "Betty"
+(hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
+[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'first_name': 'Betty', 'id': '49faff9a-6318-451f-87b6-910505c55907', 'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'updated_at': datetime.datetime(2017, 10, 2, 3, 11, 3, 49401)}
+```
+
+* all or all BaseModel:
+```
+(hbnb) create User
+35dd5991-c54f-4e33-a4c4-2be5219cc15e
+(hbnb) create BaseModel
+2c181221-b41f-47f9-bf2a-9e7bc53126a1
+(hbnb) all BaseModel
+["[BaseModel] (2c181221-b41f-47f9-bf2a-9e7bc53126a1) {'id': '2c181221-b41f-47f9-bf2a-9e7bc53126a1', 'created_at': datetime.datetime(2021, 7, 1, 4, 46, 34, 306736), 'updated_at': datetime.datetime(2021, 7, 1, 4, 46, 34, 306804)}", "[User] (35dd5991-c54f-4e33-a4c4-2be5219cc15e) {'id': '35dd5991-c54f-4e33-a4c4-2be5219cc15e', 'created_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151113), 'updated_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151209)}"]
+(hbnb) all
+["[BaseModel] (2c181221-b41f-47f9-bf2a-9e7bc53126a1) {'id': '2c181221-b41f-47f9-bf2a-9e7bc53126a1', 'created_at': datetime.datetime(2021, 7, 1, 4, 46, 34, 306736), 'updated_at': datetime.datetime(2021, 7, 1, 4, 46, 34, 306804)}", "[User] (35dd5991-c54f-4e33-a4c4-2be5219cc15e) {'id': '35dd5991-c54f-4e33-a4c4-2be5219cc15e', 'created_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151113), 'updated_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151209)}"]
+(hbnb) all User
+["[User] (35dd5991-c54f-4e33-a4c4-2be5219cc15e) {'id': '35dd5991-c54f-4e33-a4c4-2be5219cc15e', 'created_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151113), 'updated_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151209)}"]
+(hbnb) 
+```
+
+#### Instance mode:
+
+* `<class name>.all() `:
+
+```
+hbnb) User.all()
+["[User] (35dd5991-c54f-4e33-a4c4-2be5219cc15e) {'id': '35dd5991-c54f-4e33-a4c4-2be5219cc15e', 'created_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151113), 'updated_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151209)}", "[User] (03be30e8-d686-4b4f-bdb0-66180bb76c62) {'id': '03be30e8-d686-4b4f-bdb0-66180bb76c62', 'created_at': datetime.datetime(2021, 7, 1, 4, 48, 2, 274519), 'updated_at': datetime.datetime(2021, 7, 1, 4, 48, 2, 274584)}"]
+```
+
+* ```<class name>.count()```:
+
+```
+(hbnb) User.count()
+2
+```
+
+* ```<class name>.show(<id>)```:
+
+```
+(hbnb) User.show("35dd5991-c54f-4e33-a4c4-2be5219cc15e")
+[User] (35dd5991-c54f-4e33-a4c4-2be5219cc15e) {'id': '35dd5991-c54f-4e33-a4c4-2be5219cc15e', 'created_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151113), 'updated_at': datetime.datetime(2021, 7, 1, 4, 46, 0, 151209)}
+(hbnb) 
+```
+
+* ```<class name>.destroy(<id>)```:
+
+```
+(hbnb) User.count()
+2
+(hbnb) User.destroy("35dd5991-c54f-4e33-a4c4-2be5219cc15e")
+(hbnb) User.count()
+1
+(hbnb) 
+```
+
+* update
+
+```
+(hbnb) User.show("03be30e8-d686-4b4f-bdb0-66180bb76c62")[User] (03be30e8-d686-4b4f-bdb0-66180bb76c62) {'id': '03be30e8-d686-4b4f-bdb0-66180bb76c62', 'created_at': datetime.datetime(2021, 7, 1, 4, 48, 2, 274519), 'updated_at': datetime.datetime(2021, 7, 1, 4, 48, 2, 274584)}
+(hbnb) User.update("03be30e8-d686-4b4f-bdb0-66180bb76c62", "first_name", "John")
+(hbnb) User.show("03be30e8-d686-4b4f-bdb0-66180bb76c62")[User] (03be30e8-d686-4b4f-bdb0-66180bb76c62) {'updated_at': datetime.datetime(2021, 7, 1, 4, 53, 12, 110537), 'id': '03be30e8-d686-4b4f-bdb0-66180bb76c62', 'first_name': '"John"', 'created_at': datetime.datetime(2021, 7, 1, 4, 48, 2, 274519)}
+```
+
+More than one command:
+
+```
+(hbnb) User.show("03be30e8-d686-4b4f-bdb0-66180bb76c62")[User] (03be30e8-d686-4b4f-bdb0-66180bb76c62) {'updated_at': datetime.datetime(2021, 7, 1, 4, 53, 12, 110537), 'id': '03be30e8-d686-4b4f-bdb0-66180bb76c62', 'first_name': '"John"', 'created_at': datetime.datetime(2021, 7, 1, 4, 48, 2, 274519)}
+(hbnb) User.update("03be30e8-d686-4b4f-bdb0-66180bb76c62", {'first_name': "Goku", "age": 89})
+(hbnb) User.show("03be30e8-d686-4b4f-bdb0-66180bb76c62")[User] (03be30e8-d686-4b4f-bdb0-66180bb76c62) {'age': '"89"', 'updated_at': datetime.datetime(2021, 7, 1, 4, 54, 21, 791081), 'id': '03be30e8-d686-4b4f-bdb0-66180bb76c62', 'first_name': '"Goku"', 'created_at': datetime.datetime(2021, 7, 1, 4, 48, 2, 274519)}
+```
+
+
 ## 1.Models file Structure
 
 ##|File|Description|Recommendations
 ---|---|---|---
 1.0|[engine](./models/engine)|directory of Store first object|The first way you will see here is to save these objects to a file with dictionaries: ```<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>```
 1.1|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-1.2|[amenity.py](./models/engine/amenity.py)||
-1.3|[base_model.py](./models/engine/base_model.py)||
-1.4|[city.py](./models/engine/city.py)||
-1.5|[place.py](./models/engine/place.py)||
-1.6|[review.py](./models/engine/review.py)||
-1.7|[state.py](./models/engine/state.py)||
-1.8|[user.py](./models/engine/user.py)||
+1.2|[amenity.py](./models/engine/amenity.py)|Amenity class|
+1.3|[base_model.py](./models/engine/base_model.py)|Base Model class|
+1.4|[city.py](./models/engine/city.py)|City Class|
+1.5|[place.py](./models/engine/place.py)|Place Class|
+1.6|[review.py](./models/engine/review.py)|Review Class|
+1.7|[state.py](./models/engine/state.py)|State Class|
+1.8|[user.py](./models/engine/user.py)|User Class|
 
 ### 1.0.Engine structure
 
@@ -234,3 +366,7 @@ guillaume@ubuntu:~/AirBnB$
 ---|---|---
 2.0.0.0|[__init__.py](./tests/test_models/test_engine/__init__.py)|initialization code for the package: files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
 2.0.0.1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)|Test if the process and the allocation is correct(ouput and process)
+
+## Authors:
+Joshua Claudio Enrico
+Katherine Soto
