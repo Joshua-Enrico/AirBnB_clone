@@ -1,6 +1,6 @@
 # Hbnb console
 
-![airbnb_img](https://imgur.com/symULZt)
+![airbnb_img](https://i.imgur.com/symULZt.png)
 
 The AirBnB clone project starts now until… the end of the first year. The goal of the project is to deploy on your server a simple copy of the AirBnB website.
 After 4 months, you will have a complete web application composed by:
@@ -10,11 +10,11 @@ After 4 months, you will have a complete web application composed by:
 * A database or files that store data (data = objects)
 * An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
 
-![steps](https://imgur.com/9WkM9nn)
+![steps](https://i.imgur.com/9WkM9nn.png)
 
 And the final data diagram looks like this:
 
-![data_diagram](https://imgur.com/I7VURNR)
+![data_diagram](https://i.imgur.com/I7VURNR.jpg)
 
 # First step and GOAl of this repository: Write a command interpreter to manage your AirBnB objects.
 
@@ -166,6 +166,14 @@ h|User|```User```
 
 ### 1.0.Engine structure
 
+Every time that the program is launched, we will save these objects to a file:
+In this project, we converted the dictionary representation to a JSON string. JSON is a standard representation of a data structure. With this format, humans can read and all programming languages have a JSON reader and writer.
+
+The flow of serialization-deserialization is:
+```
+<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> JSON dump -> <class 'str'> -> FILE -> <class 'str'> -> JSON load -> <class 'dict'> -> <class 'BaseModel'>
+```
+
 ##|File|Description|Recommendations
 ---|---|---|---
 1.0.0|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
@@ -200,29 +208,29 @@ OK
 guillaume@ubuntu:~/AirBnB$
 ```
 
-##|File|Description|Recommendations
----|---|---|---
-2.0|[test_models](./tests/test_models)||
-2.1|[__init__.py](./tests/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2.2|[test_console.py](./tests/test_console.py)||
+##|File|Description
+---|---|---
+2.0|[test_models](./tests/test_models)|Test of the models class
+2.1|[__init__.py](./tests/__init__.py)|initialization code for the package: files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2.2|[test_console.py](./tests/test_console.py)|Test of the console
 
 ### 2.0.Test_models structure
 
-##|File|Description|Recommendations
----|---|---|---
-2.0.0|[test_engine](./tests/test_models/test_engine)||
-2.0.1|[__init__.py](./tests/test_models/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2.0.2|[test_amenity.py](./tests/test_models/test_amenity.py)||
-2.0.3|[test_base_model.py](./tests/test_models/test_base_model.py)||
-2.0.4|[test_city.py](./tests/test_models/test_city.py)||
-2.0.5|[test_place.py](./tests/test_models/test_place.py)||
-2.0.6|[test_review.py](./tests/test_models/test_review.py)||
-2.0.7|[test_state.py](./tests/test_models/test_state.py)||
-2.0.8|[test_user.py](./tests/test_models/test_user.py)||
+##|File|Description
+---|---|---
+2.0.0|[test_engine](./tests/test_models/test_engine)|Directory where the project tests all the tests for the storage of the program
+2.0.1|[__init__.py](./tests/test_models/__init__.py)|initialization code for the package: files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2.0.2|[test_amenity.py](./tests/test_models/test_amenity.py)|Testing Amenity class- Comproving expectect outputs and documentation
+2.0.3|[test_base_model.py](./tests/test_models/test_base_model.py)|Testing BaseModel- Comproving expectect outputs and documentation
+2.0.4|[test_city.py](./tests/test_models/test_city.py)|Test City Class - Comproving expectect outputs and documentation
+2.0.5|[test_place.py](./tests/test_models/test_place.py)|Test place - Comproving expectect outputs and documentation
+2.0.6|[test_review.py](./tests/test_models/test_review.py)|Test Review - Comproving expectect outputs and documentation
+2.0.7|[test_state.py](./tests/test_models/test_state.py)|Test state - Comproving expectect outputs and documentation
+2.0.8|[test_user.py](./tests/test_models/test_user.py)|Test User - Comproving expectect outputs and documentation
 
 #### 2.0.0.Test_engine structure
 
-##|File|Description|Recommendations
----|---|---|---
-2.0.0.0|[__init__.py](./tests/test_models/test_engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2.0.0.1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)||
+##|File|Description
+---|---|---
+2.0.0.0|[__init__.py](./tests/test_models/test_engine/__init__.py)|initialization code for the package: files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2.0.0.1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)|Test if the process and the allocation is correct(ouput and process)
