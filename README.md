@@ -96,3 +96,10 @@ $
 ```
 
 All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unittest discover tests" | bash ```
+
+## Hacker Levels
+
+##|File|Description|Recommendations
+---|---|---|---
+0|[console.py](./console.py)|command interpreter to manage your AirBnB objects|Create a new object (ex: a new User or a new Place) ; Retrieve an; object from a file, a database etc… ; Do operations on objects (count, compute stats, etc…); Update attributes of an object; Destroy an object
+0|[console.py](console.py)|command interpreter to manage your AirBnB objects|Create a new object (ex: a new User or a new Place) ; Retrieve an; object from a file, a database etc… ; Do operations on objects (count, compute stats, etc…); Update attributes of an object; Destroy an object
