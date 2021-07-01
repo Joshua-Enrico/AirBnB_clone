@@ -127,8 +127,8 @@ Quit command to exit the program
 guillaume@ubuntu:~/AirBnB$ 
 ```
 
-##|Commands|how to use it in the console|Instance form to use it|Description
----|---|---|---
+##|Commands|how to use it|Instance form|Description
+---|---|---|---|---
 0.0|quit|```quit```||Exit the program
 0.1|EOF|```EOF```||Exit the program
 0.2|empty line|``` ```||not do nothing
@@ -140,7 +140,7 @@ guillaume@ubuntu:~/AirBnB$
 0.8|count|```count <class name>```|```<class name>.count()```|retrieve the number of instances of a class
 
 ##|Allowed classes
----|---|---|---
+---|---
 a|BaseModel|```BaseModel```
 b|User|```User```
 c|Place|```Place```
