@@ -207,7 +207,7 @@ class ShowTest(unittest.TestCase):
         """testing show's behaviour"""
         try:
             os.remove("file.json")
-        except:
+        except Exception as f:
             pass
 
         with patch('sys.stdout', new=StringIO()) as f:
@@ -275,7 +275,7 @@ class ShowTest(unittest.TestCase):
         """Validate show in both ways"""
         try:
             os.remove("file.json")
-        except:
+        except Exception as f:
             pass
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all")
@@ -296,12 +296,11 @@ class ShowTest(unittest.TestCase):
             HBNBCommand().onecmd("User.all(dasds)")
         self.assertEqual(f.getvalue(), '*** Unknown syntax: User.all(dasds)\n')
 
-
     def test_update(self):
         """Validate all both ways"""
         try:
             os.remove("file.json")
-        except:
+        except Exception as f:
             pass
         """Testing update's behaviour"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -352,7 +351,7 @@ class ShowTest(unittest.TestCase):
         """Validate count method"""
         try:
             os.remove("file.json")
-        except:
+        except Exception as f:
             pass
 
         with patch('sys.stdout', new=StringIO()) as f:
