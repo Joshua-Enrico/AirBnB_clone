@@ -105,15 +105,52 @@ All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unitt
 1|[models](./models)|directory of class|-
 2|[tests](./tests)|directory of tests of the console and classes|-
 
+## Models file Structure
+
 ##|File|Description|Recommendations
 ---|---|---|---
-0|[engine](./engine)|directory of Store first object|The first way you will see here is to save these objects to a file with dictionaries: ```<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>```
-1|[__init__.py](./engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2|[amenity.py](./engine/amenity.py)||
-3|[base_model.py](./engine/base_model.py)||
-4|[city.py](./engine/city.py)||
-5|[place.py](./engine/place.py)||
-6|[review.py](./engine/review.py)||
-7|[state.py](./engine/state.py)||
-8|[user.py](./engine/user.py)||
+0|[engine](./models/engine)|directory of Store first object|The first way you will see here is to save these objects to a file with dictionaries: ```<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>```
+1|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2|[amenity.py](./models/engine/amenity.py)||
+3|[base_model.py](./models/engine/base_model.py)||
+4|[city.py](./models/engine/city.py)||
+5|[place.py](./models/engine/place.py)||
+6|[review.py](./models/engine/review.py)||
+7|[state.py](./models/engine/state.py)||
+8|[user.py](./models/engine/user.py)||
 
+### Engine structure
+
+##|File|Description|Recommendations
+---|---|---|---
+0|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+1|[file_storage.py](./models/engine/file_storage.py)||
+
+## Models tests Structure
+
+##|File|Description|Recommendations
+---|---|---|---
+0|[test_models](./tests/test_models)||
+1|[__init__.py](./tests/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2|[test_console.py](./tests/test_console.py)||
+
+### Test_models structure
+
+##|File|Description|Recommendations
+---|---|---|---
+0|[test_engine](./tests/test_models/test_engine)||
+1|[__init__.py](./tests/test_models/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2|[test_amenity.py](./tests/test_models/test_amenity.py)||
+3|[test_base_model.py](./tests/test_models/test_base_model.py)||
+4|[test_city.py](./tests/test_models/test_city.py)||
+5|[test_place.py](./tests/test_models/test_place.py)||
+6|[test_review.py](./tests/test_models/test_review.py)||
+7|[test_state.py](./tests/test_models/test_state.py)||
+8|[test_user.py](./tests/test_models/test_user.py)||
+
+#### Test_engine structure
+
+##|File|Description|Recommendations
+---|---|---|---
+0|[__init__.py](./tests/test_models/test_engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)||
