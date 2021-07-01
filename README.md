@@ -99,11 +99,11 @@ All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unitt
 
 ## Airbnb files structure
 
-##|File|Description|Recommendations
----|---|---|---
-0|[console.py](./console.py)|command interpreter to manage your AirBnB objects|Create a new object (ex: a new User or a new Place) ; Retrieve an; object from a file, a database etc… ; Do operations on objects (count, compute stats, etc…); Update attributes of an object; Destroy an object
-1|[models](./models)|directory of class|-
-2|[tests](./tests)|directory of tests of the console and classes|-
+##|File|Description
+---|---|---
+0|[console.py](./console.py)|command interpreter to manage your AirBnB objects: Create a new object (ex: a new User or a new Place) ; Retrieve an; object from a file, a database etc… ; Do operations on objects (count, compute stats, etc…); Update attributes of an object; Destroy an object
+1|[models](./models)|directory of all the classes
+2|[tests](./tests)|directory of console test and class tests
 
 ## 0.Console and how to executes
 
