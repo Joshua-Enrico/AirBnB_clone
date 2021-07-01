@@ -205,6 +205,14 @@ class ShowTest(unittest.TestCase):
 
     def test_show(self):
         """testing show's behaviour"""
+        try:
+            os.remove("file.json")
+        except:
+            pass
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        id = f.getvalue()
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show")
             self.assertEqual("** class name missing **\n",
@@ -218,9 +226,27 @@ class ShowTest(unittest.TestCase):
             self.assertEqual("** instance id missing **\n",
                              f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show" + "User " + id)
+        self.assertIsNotNone(f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show" + "User " + id)
+        self.assertIsNotNone(f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show User 123123")
             self.assertEqual("** no instance found **\n",
                              f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.show(1)")
+            expected = "*** Unknown syntax: User.show(1)\n"
+        self.assertEqual(f.getvalue(), expected)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("sdasdasd.show(1)")
+            expected = "*** Unknown syntax: sdasdasd.show(1)\n"
+        self.assertEqual(f.getvalue(), expected)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.show()")
+            expected = "*** Unknown syntax: User.show()\n"
+        self.assertEqual(f.getvalue(), expected)
 
     def test_destroy(self):
         """testing destroy's behaviour"""
