@@ -105,6 +105,51 @@ All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unitt
 1|[models](./models)|directory of class|-
 2|[tests](./tests)|directory of tests of the console and classes|-
 
+## 0.Console and how to executes
+
+you can run it writting ```./console.py``` in your terminal and you will enter to the command interpreter like you see in this example, after it you can use the commands allowed for the terminal.
+
+```
+guillaume@ubuntu:~/AirBnB$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) help quit
+Quit command to exit the program
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit 
+guillaume@ubuntu:~/AirBnB$ 
+```
+
+##|Commands|how to use it in the console|Instance form to use it|Description
+---|---|---|---
+0.0|quit|```quit```||Exit the program
+0.1|EOF|```EOF```||Exit the program
+0.2|empty line|``` ```||not do nothing
+0.3|create|```create <class name>```|| create an instance of the class
+0.4|show|```show <class name> <id number>```|```<class name>.show(<id>)```|Prints the string representation of an instance based on the class name and id
+0.5|destroy|```destroy <class name> <id number>```|```<class name>.destroy(<id>)```|Deletes an instance based on the class name and id (save the change into the JSON file)
+0.6|all|```all``` or ```all <class name>```|```<class name>.all()```|Prints all string representation of all instances based or not on the class name
+0.7|update|```update <class name> <id number> <attribute to update> "<new value of attribute>"```|simple form:```<class name>.update(<id>, <attribute name>, <attribute value>)``` update more than 1 attribute(using dictionaries): ```<class name>.update(<id>, <dictionary representation>)```|Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). If there are more commands, the command interpreter will only count the first attribute with its value
+0.8|count|```count <class name>```|```<class name>.count()```|retrieve the number of instances of a class
+
+##|Allowed classes
+---|---|---|---
+a|BaseModel|```BaseModel```
+b|User|```User```
+c|Place|```Place```
+d|State|```State```
+e|City|```City```
+f|Amenity|```Amenity```
+g|Review|```Review```
+h|User|```User```
+
 ## 1.Models file Structure
 
 ##|File|Description|Recommendations
@@ -126,7 +171,34 @@ All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unitt
 1.0.0|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
 1.0.1|[file_storage.py](./models/engine/file_storage.py)||
 
-## 2.Tests file Structure
+## 2.Tests file Structure and how to compile
+
+All files, classes, functions must be tested with unit tests
+```
+guillaume@ubuntu:~/AirBnB$ python3 -m unittest discover tests
+...................................................................................
+...................................................................................
+.......................
+----------------------------------------------------------------------
+Ran 189 tests in 13.135s
+
+OK
+guillaume@ubuntu:~/AirBnB$
+```
+
+Unit tests must also pass in non-interactive mode:
+
+```
+guillaume@ubuntu:~/AirBnB$ echo "python3 -m unittest discover tests" | bash
+...................................................................................
+...................................................................................
+.......................
+----------------------------------------------------------------------
+Ran 189 tests in 13.135s
+
+OK
+guillaume@ubuntu:~/AirBnB$
+```
 
 ##|File|Description|Recommendations
 ---|---|---|---
