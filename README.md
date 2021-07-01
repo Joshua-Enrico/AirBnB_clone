@@ -1,6 +1,6 @@
 # Hbnb console
 
-![airbnb_img](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210630%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210630T035621Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=96469635c43f46978fce60de40cc0f5ae7d3095d026fc36f76bbadb5fbb036f6)
+![airbnb_img](https://imgur.com/symULZt)
 
 The AirBnB clone project starts now until… the end of the first year. The goal of the project is to deploy on your server a simple copy of the AirBnB website.
 After 4 months, you will have a complete web application composed by:
@@ -10,11 +10,11 @@ After 4 months, you will have a complete web application composed by:
 * A database or files that store data (data = objects)
 * An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
 
-![steps](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/06fccc41df40ab8f9d49.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210701%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210701T003323Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=114311c3d3ee500da9c810064ec3a5bdf27f0357e307417615374a066b5427ef)
+![steps](https://imgur.com/9WkM9nn)
 
 And the final data diagram looks like this:
 
-![data_diagram](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2020/9/99e1a8f2be8c09d5ce5ac321e8cf39f0917f8db5.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210629%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210629T042130Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=b21e6f1a6bb6f56dd0d0c8f99eaf1b84ed6471f457b93ec0d2c4ba1a76c0e3e4)
+![data_diagram](https://imgur.com/I7VURNR)
 
 # First step and GOAl of this repository: Write a command interpreter to manage your AirBnB objects.
 
