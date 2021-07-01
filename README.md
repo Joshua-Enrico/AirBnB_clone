@@ -97,10 +97,23 @@ $
 
 All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unittest discover tests" | bash ```
 
-## Hacker Levels
+## Airbnb files structure
 
 ##|File|Description|Recommendations
 ---|---|---|---
 0|[console.py](./console.py)|command interpreter to manage your AirBnB objects|Create a new object (ex: a new User or a new Place) ; Retrieve an; object from a file, a database etc… ; Do operations on objects (count, compute stats, etc…); Update attributes of an object; Destroy an object
-1|[models](./models/.)|directory of class|-
+1|[models](./models)|directory of class|-
 2|[tests](./tests)|directory of tests of the console and classes|-
+
+##|File|Description|Recommendations
+---|---|---|---
+0|[engine](./engine)|directory of Store first object|The first way you will see here is to save these objects to a file with dictionaries: ```<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>```
+1|[__init__.py](./engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2|[amenity.py](./engine/amenity.py)||
+3|[base_model.py](./engine/base_model.py)||
+4|[city.py](./engine/city.py)||
+5|[place.py](./engine/place.py)||
+6|[review.py](./engine/review.py)||
+7|[state.py](./engine/state.py)||
+8|[user.py](./engine/user.py)||
+
