@@ -10,7 +10,7 @@ After 4 months, you will have a complete web application composed by:
 * A database or files that store data (data = objects)
 * An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
 
-![steps](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/d2d06462824fab5846f3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210629%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210629T042130Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=50b69fd1b2ff10699ea29d046ad4d3fae31ceabf77f6b7b164eeef066cdc33fd)
+![steps](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/06fccc41df40ab8f9d49.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210701%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210701T003323Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=114311c3d3ee500da9c810064ec3a5bdf27f0357e307417615374a066b5427ef)
 
 And the final data diagram looks like this:
 
@@ -96,3 +96,10 @@ $
 ```
 
 All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unittest discover tests" | bash ```
+
+## Hacker Levels
+
+##|File|Description|Recommendations
+---|---|---|---
+0|[console.py](./console.py)|command interpreter to manage your AirBnB objects|Create a new object (ex: a new User or a new Place) ; Retrieve an; object from a file, a database etc… ; Do operations on objects (count, compute stats, etc…); Update attributes of an object; Destroy an object
+0|[console.py](console.py)|command interpreter to manage your AirBnB objects|Create a new object (ex: a new User or a new Place) ; Retrieve an; object from a file, a database etc… ; Do operations on objects (count, compute stats, etc…); Update attributes of an object; Destroy an object
