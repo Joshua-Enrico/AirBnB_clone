@@ -1,6 +1,6 @@
-# Airbnb console
+# Hbnb console
 
-![airbnb_img](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210629%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210629T042130Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=366e77e47a1ee533ae4802f4bd603e5b1d1c213b3c58889ee22debac45e72c9b)
+![airbnb_img](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210630%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210630T035621Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=96469635c43f46978fce60de40cc0f5ae7d3095d026fc36f76bbadb5fbb036f6)
 
 The AirBnB clone project starts now until… the end of the first year. The goal of the project is to deploy on your server a simple copy of the AirBnB website.
 After 4 months, you will have a complete web application composed by:
@@ -105,52 +105,52 @@ All tests should also pass in non-interactive mode: ``` $ echo "python3 -m unitt
 1|[models](./models)|directory of class|-
 2|[tests](./tests)|directory of tests of the console and classes|-
 
-## Models file Structure
+## 1.Models file Structure
 
 ##|File|Description|Recommendations
 ---|---|---|---
-0|[engine](./models/engine)|directory of Store first object|The first way you will see here is to save these objects to a file with dictionaries: ```<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>```
-1|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2|[amenity.py](./models/engine/amenity.py)||
-3|[base_model.py](./models/engine/base_model.py)||
-4|[city.py](./models/engine/city.py)||
-5|[place.py](./models/engine/place.py)||
-6|[review.py](./models/engine/review.py)||
-7|[state.py](./models/engine/state.py)||
-8|[user.py](./models/engine/user.py)||
+1.0|[engine](./models/engine)|directory of Store first object|The first way you will see here is to save these objects to a file with dictionaries: ```<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> <class 'BaseModel'>```
+1.1|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+1.2|[amenity.py](./models/engine/amenity.py)||
+1.3|[base_model.py](./models/engine/base_model.py)||
+1.4|[city.py](./models/engine/city.py)||
+1.5|[place.py](./models/engine/place.py)||
+1.6|[review.py](./models/engine/review.py)||
+1.7|[state.py](./models/engine/state.py)||
+1.8|[user.py](./models/engine/user.py)||
 
-### Engine structure
-
-##|File|Description|Recommendations
----|---|---|---
-0|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-1|[file_storage.py](./models/engine/file_storage.py)||
-
-## Models tests Structure
+### 1.0.Engine structure
 
 ##|File|Description|Recommendations
 ---|---|---|---
-0|[test_models](./tests/test_models)||
-1|[__init__.py](./tests/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2|[test_console.py](./tests/test_console.py)||
+1.0.0|[__init__.py](./models/engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+1.0.1|[file_storage.py](./models/engine/file_storage.py)||
 
-### Test_models structure
-
-##|File|Description|Recommendations
----|---|---|---
-0|[test_engine](./tests/test_models/test_engine)||
-1|[__init__.py](./tests/test_models/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2|[test_amenity.py](./tests/test_models/test_amenity.py)||
-3|[test_base_model.py](./tests/test_models/test_base_model.py)||
-4|[test_city.py](./tests/test_models/test_city.py)||
-5|[test_place.py](./tests/test_models/test_place.py)||
-6|[test_review.py](./tests/test_models/test_review.py)||
-7|[test_state.py](./tests/test_models/test_state.py)||
-8|[test_user.py](./tests/test_models/test_user.py)||
-
-#### Test_engine structure
+## 2.Tests file Structure
 
 ##|File|Description|Recommendations
 ---|---|---|---
-0|[__init__.py](./tests/test_models/test_engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)||
+2.0|[test_models](./tests/test_models)||
+2.1|[__init__.py](./tests/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2.2|[test_console.py](./tests/test_console.py)||
+
+### 2.0.Test_models structure
+
+##|File|Description|Recommendations
+---|---|---|---
+2.0.0|[test_engine](./tests/test_models/test_engine)||
+2.0.1|[__init__.py](./tests/test_models/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2.0.2|[test_amenity.py](./tests/test_models/test_amenity.py)||
+2.0.3|[test_base_model.py](./tests/test_models/test_base_model.py)||
+2.0.4|[test_city.py](./tests/test_models/test_city.py)||
+2.0.5|[test_place.py](./tests/test_models/test_place.py)||
+2.0.6|[test_review.py](./tests/test_models/test_review.py)||
+2.0.7|[test_state.py](./tests/test_models/test_state.py)||
+2.0.8|[test_user.py](./tests/test_models/test_user.py)||
+
+#### 2.0.0.Test_engine structure
+
+##|File|Description|Recommendations
+---|---|---|---
+2.0.0.0|[__init__.py](./tests/test_models/test_engine/__init__.py)|initialization code for the package|files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
+2.0.0.1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)||
