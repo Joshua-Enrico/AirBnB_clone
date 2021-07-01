@@ -369,4 +369,4 @@ guillaume@ubuntu:~/AirBnB$
 
 ## Authors:
 * Joshua Claudio Enrico |   <img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" /> [GitHub](https://github.com/yoyogold-a11) | [Medium](https://joshuaclaudioenrico.medium.com/)
-* Katherine Soto | [GitHub](https://github.com/kateincoding) | [Medium](https://kateincoding.medium.com/)
+* Katherine Soto | <img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />[GitHub](https://github.com/kateincoding) | [Medium](https://kateincoding.medium.com/)
