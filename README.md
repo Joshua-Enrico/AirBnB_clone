@@ -368,5 +368,5 @@ guillaume@ubuntu:~/AirBnB$
 2.0.0.1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)|Test if the process and the allocation is correct(ouput and process)
 
 ## Authors:
-* Joshua Claudio Enrico | [GitHub](https://github.com/yoyogold-a11)
-* Katherine Soto | [GitHub](https://github.com/kateincoding)
+* Joshua Claudio Enrico | [GitHub](https://github.com/yoyogold-a11) | [Medium](https://joshuaclaudioenrico.medium.com/) 
+* Katherine Soto | [GitHub](https://github.com/kateincoding) | [Medium](https://kateincoding.medium.com/)
