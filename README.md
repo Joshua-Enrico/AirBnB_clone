@@ -368,5 +368,5 @@ guillaume@ubuntu:~/AirBnB$
 2.0.0.1|[test_file_storage.py](./tests/test_models/test_engine/test_file_storage.py)|Test if the process and the allocation is correct(ouput and process)
 
 ## Authors:
-* Joshua Claudio Enrico |   <img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" /> [GitHub](https://github.com/yoyogold-a11) | [Medium](https://joshuaclaudioenrico.medium.com/)
-* Katherine Soto | <img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />[GitHub](https://github.com/kateincoding) | [Medium](https://kateincoding.medium.com/)
+* Joshua Claudio Enrico |   <img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" /> [GitHub](https://github.com/yoyogold-a11) | https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white[Medium](https://joshuaclaudioenrico.medium.com/)
+* Katherine Soto | <img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />[GitHub](https://github.com/kateincoding) | https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white[Medium](https://kateincoding.medium.com/)
