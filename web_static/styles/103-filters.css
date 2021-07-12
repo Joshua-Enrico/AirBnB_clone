@@ -11,8 +11,8 @@
 
 section.filters button {
     font-size: 18px;
-    color: white;
-    background-color: #FF5A5F;
+    color: rgb(0, 0, 0);
+    background-color: #ff0008;
     height: 48px;
     width: 20%;
     border: 0px;
